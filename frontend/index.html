@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spam Classifier</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- Loading screen -->
+  <div id="loading">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="logo-wrap">
+      <div class="logo-icon">🛡️</div>
+      <div class="logo-title">Spam Classifier</div>
+      <div class="logo-sub">AI-powered email spam detection</div>
+      <button id="enter-btn" onclick="openDashboard()">Check Email &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard">
+    <div class="card">
+      <div class="card-title">Email Analyser</div>
+      <div class="card-sub">Paste an email below to classify it as ham or spam.</div>
+
+      <label for="email-input">Email text</label>
+      <textarea id="email-input" placeholder="Paste your email content here..."></textarea>
+
+      <label for="model-select">Model</label>
+      <select id="model-select">
+        <option value="naive_bayes">Multinomial Naive Bayes (recommended)</option>
+        <option value="logreg">Logistic Regression</option>
+      </select>
+
+      <button id="analyse-btn" onclick="analyse()">Analyse Email</button>
+
+      <div id="result">
+        <div class="result-label"      id="result-label"></div>
+        <div class="result-confidence" id="result-confidence"></div>
+        <div class="result-model"      id="result-model"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from api.model_loader import load_models
 from api.schemas import PredictRequest, PredictResponse
+
+_FRONTEND = Path(__file__).resolve().parent.parent / "frontend"
 
 
 @asynccontextmanager
@@ -22,6 +27,13 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+app.mount("/static", StaticFiles(directory=_FRONTEND), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def index() -> FileResponse:
+    return FileResponse(_FRONTEND / "index.html")
 
 
 @app.post("/predict", response_model=PredictResponse)
