@@ -220,7 +220,7 @@ if __name__ == "__main__":
     print(f"  Ham   (label=0) : {(df['label'] == 0).sum():>7,}  ({(df['label'] == 0).mean():.1%})")
     print(f"  Spam  (label=1) : {(df['label'] == 1).sum():>7,}  ({(df['label'] == 1).mean():.1%})")
     print(f"  Avg text length : {df['text'].str.len().mean():>7.0f} chars")
-    print(f"\n  Per-subset breakdown (ham / spam / total):")
+    print("\n  Per-subset breakdown (ham / spam / total):")
     pivot = (
         df.groupby(["source", "label"])
         .size()

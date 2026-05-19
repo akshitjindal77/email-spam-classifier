@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import Literal
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
@@ -42,7 +43,7 @@ def predict(body: PredictRequest, request: Request) -> PredictResponse:
     pipeline = request.app.state.models[body.model]
     proba = pipeline.predict_proba([body.text])[0]
     predicted_class = int(proba.argmax())
-    label = "spam" if predicted_class == 1 else "ham"
+    label: Literal["spam", "ham"] = "spam" if predicted_class == 1 else "ham"
     confidence = round(float(proba[predicted_class]), 4)
     top_tokens = [TokenScore(token=t, score=round(s, 4)) for t, s in explain(pipeline, body.text)]
     return PredictResponse(label=label, confidence=confidence, model=body.model, top_tokens=top_tokens)

@@ -9,7 +9,6 @@ from pathlib import Path
 
 import joblib
 import matplotlib.pyplot as plt
-import numpy as np
 import seaborn as sns
 from sklearn.metrics import (
     average_precision_score,
@@ -149,8 +148,8 @@ def _plot_pr_curves(
     ax.set_ylabel("Precision")
     ax.set_title("Precision-Recall Curves")
     ax.legend(loc="lower left")
-    ax.set_xlim([0, 1])
-    ax.set_ylim([0, 1.05])
+    ax.set_xlim((0, 1))
+    ax.set_ylim((0, 1.05))
 
     plt.tight_layout()
     out = reports_dir / "eval_pr_curve.png"

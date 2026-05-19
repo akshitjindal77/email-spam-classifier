@@ -1,6 +1,5 @@
 """Unit tests for src/preprocessing.py."""
 
-import pytest
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
