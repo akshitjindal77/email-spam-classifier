@@ -263,3 +263,32 @@ select:focus { border-color: #7928ca; }
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+
+/* ── Wide card (both-models mode) ─────────────────────────── */
+.card.wide {
+  width: min(880px, calc(100vw - 32px));
+}
+
+/* ── Both-models result container ─────────────────────────── */
+#result.both {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.result-panel {
+  border-radius: 14px;
+  padding: 16px 20px;
+  animation: fadeUp 0.4s ease;
+}
+
+.result-panel.spam { background: #fff1f2; border: 1.5px solid #fca5a5; }
+.result-panel.ham  { background: #f0fdf4; border: 1.5px solid #86efac; }
+.result-panel.spam .result-label { color: #dc2626; }
+.result-panel.ham  .result-label { color: #16a34a; }
