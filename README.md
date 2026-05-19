@@ -6,15 +6,15 @@ A spam classifier trained on the [Enron-Spam dataset](http://www2.aueb.gr/users/
 
 ## Features
 
-- Two classifiers — Logistic Regression and Multinomial Naive Bayes — both achieving ~98.3% accuracy
+- Two classifiers: Logistic Regression and Multinomial Naive Bayes: both achieving ~98.3% accuracy
 - TF-IDF with Porter stemming, bigrams, and URL/email token replacement
 - FastAPI prediction endpoint with confidence scores and top contributing tokens
 - Interactive frontend with animated loading screen, confidence meter, and token contribution chart
 - Side-by-side comparison mode: run both models on the same email simultaneously
 - EDA notebook with class balance, text length, top-word, and word-cloud plots
 - Full evaluation report: confusion matrix, PR curves, and per-class metrics
-- Docker support — single-container deployment with models baked in
-- GitHub Actions CI — lint, type check, and test on every push to main
+- Docker support: single-container deployment with models baked in
+- GitHub Actions CI: lint, type check, and test on every push to main
 - Auto-deploys on Render via `render.yaml`
 
 ## Architecture
@@ -84,9 +84,9 @@ python -m src.evaluate
 ```
 
 Prints classification reports to stdout and saves to `reports/`:
-- `eval_confusion_matrix.png` — side-by-side confusion matrices
-- `eval_pr_curve.png` — precision-recall curves for both models
-- `metrics.json` — numeric results (accuracy, precision, recall, F1, PR AUC)
+- `eval_confusion_matrix.png`: side-by-side confusion matrices
+- `eval_pr_curve.png`: precision-recall curves for both models
+- `metrics.json`: numeric results (accuracy, precision, recall, F1, PR AUC)
 
 ### 4. Start the API
 
@@ -109,10 +109,10 @@ Models are baked into the image at build time. The API is available at `http://l
 
 The browser UI is served directly by the API at `http://localhost:8000`. It requires no separate build step.
 
-- **Loading screen** — animated gradient with a "Check Email" entry button
-- **Dashboard** — paste email text, choose a model, click Analyse
-- **Results** — classification label, animated confidence bar, and a per-token contribution chart
-- **Both Models mode** — select "Both Models" in the dropdown to run both classifiers in parallel and compare results side by side
+- **Loading screen**: animated gradient with a "Check Email" entry button
+- **Dashboard**: paste email text, choose a model, click Analyse
+- **Results**: classification label, animated confidence bar, and a per-token contribution chart
+- **Both Models mode**: select "Both Models" in the dropdown to run both classifiers in parallel and compare results side by side
 
 ## API Reference
 
@@ -194,7 +194,7 @@ email-spam-classifier/
 
 ## Model Comparison
 
-Both models were trained on enron1–5 (27,716 emails) and evaluated on enron6 (6,000 emails) — a held-out subset collected from a different user's inbox to test cross-user generalization.
+Both models were trained on enron1–5 (27,716 emails) and evaluated on enron6 (6,000 emails); a held-out subset collected from a different user's inbox to test cross-user generalization.
 
 | Metric | Logistic Regression | Multinomial NB |
 |---|---|---|
@@ -211,7 +211,7 @@ Both models were trained on enron1–5 (27,716 emails) and evaluated on enron6 (
 
 The accuracy is identical, but the error profiles are different:
 
-- **Logistic Regression** is the aggressive spam catcher. It misses very few spam emails (only 23 slipped through), but it incorrectly flags 81 real emails as spam — that's 5.4% of legitimate mail. In a real inbox, users would lose work emails to the spam folder.
+- **Logistic Regression** is the aggressive spam catcher. It misses very few spam emails (only 23 slipped through), but it incorrectly flags 81 real emails as spam; that's 5.4% of legitimate mail. In a real inbox, users would lose work emails to the spam folder.
 - **Multinomial NB** is more balanced: 53 false positives, 51 false negatives. It lets slightly more spam through but protects legitimate mail better.
 
 For a deployed spam filter where losing a real email is far worse than seeing one extra spam, **Naive Bayes is the better choice on this dataset**. The API defaults to it, but Logistic Regression is available via the `model` parameter for cases where catching spam is the higher priority.
@@ -221,7 +221,7 @@ NB also has a slight edge in PR AUC (0.9994 vs 0.9977), meaning it ranks example
 ### Caveats
 
 - The test set is 75% spam (1,500 ham / 4,500 spam), which is the opposite of a typical inbox. Per-class precision and recall are the honest measures of real-world behavior; overall accuracy alone is misleading at this class balance.
-- NB is known to produce poorly calibrated probabilities — confidence scores tend to cluster near 0 or 1 even when the model is uncertain. The confidence value from the API should be read as "which class is more likely," not as a literal probability.
+- NB is known to produce poorly calibrated probabilities: confidence scores tend to cluster near 0 or 1 even when the model is uncertain. The confidence value from the API should be read as "which class is more likely," not as a literal probability.
 - Training takes ~64 seconds per model, almost entirely spent in `TfidfVectorizer.fit_transform`. The classifiers themselves train in under a second.
 
 ## Future Improvements
@@ -243,7 +243,7 @@ The suite covers preprocessing edge cases (empty strings, HTML, unicode), explai
 
 ### Render
 
-Connect the repository on [render.com](https://render.com) — Render auto-detects `render.yaml` and configures the service. No manual setup required.
+Connect the repository on [render.com](https://render.com): Render auto-detects `render.yaml` and configures the service. No manual setup required.
 
 ### Docker
 
@@ -255,8 +255,8 @@ The image uses `python:3.13-slim` and bakes all model files in at build time, so
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT: see [LICENSE](LICENSE).
 
 ## Author
 
-**Akshit Jindal** — [akshitjindal77@gmail.com](mailto:akshitjindal77@gmail.com)
+**Akshit Jindal**: [akshitjindal77@gmail.com](mailto:akshitjindal77@gmail.com)
