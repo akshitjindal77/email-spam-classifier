@@ -39,9 +39,18 @@
       <button id="analyse-btn" onclick="analyse()">Analyse Email</button>
 
       <div id="result">
-        <div class="result-label"      id="result-label"></div>
-        <div class="result-confidence" id="result-confidence"></div>
-        <div class="result-model"      id="result-model"></div>
+        <div class="result-label" id="result-label"></div>
+
+        <div class="confidence-meter">
+          <div class="confidence-bar-bg">
+            <div id="confidence-bar-fill" class="confidence-bar-fill"></div>
+          </div>
+          <span id="result-confidence-text" class="result-confidence"></span>
+        </div>
+
+        <div id="token-chart"></div>
+
+        <div class="result-model" id="result-model"></div>
       </div>
     </div>
   </div>

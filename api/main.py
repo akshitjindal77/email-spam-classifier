@@ -10,7 +10,8 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from api.model_loader import load_models
-from api.schemas import PredictRequest, PredictResponse
+from api.schemas import PredictRequest, PredictResponse, TokenScore
+from src.explain import explain
 
 _FRONTEND = Path(__file__).resolve().parent.parent / "frontend"
 
@@ -43,4 +44,5 @@ def predict(body: PredictRequest, request: Request) -> PredictResponse:
     predicted_class = int(proba.argmax())
     label = "spam" if predicted_class == 1 else "ham"
     confidence = round(float(proba[predicted_class]), 4)
-    return PredictResponse(label=label, confidence=confidence, model=body.model)
+    top_tokens = [TokenScore(token=t, score=round(s, 4)) for t, s in explain(pipeline, body.text)]
+    return PredictResponse(label=label, confidence=confidence, model=body.model, top_tokens=top_tokens)
