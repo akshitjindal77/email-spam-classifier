@@ -32,7 +32,7 @@ flowchart LR
     F --> I[api/main.py]
     G --> I
     I --> J[explain.py]
-    J --> K[/predict endpoint]
+    J --> K["/predict endpoint"]
     K --> L[frontend/app.js]
     H --> M[metrics.json + plots]
 ```
